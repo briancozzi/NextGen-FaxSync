@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaxSync.Domain", "FaxSync.Domain\FaxSync.Domain.csproj", "{566471A6-223E-423E-B70B-820BF600423D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaxSync.Services", "FaxSync.Services\FaxSync.Services.csproj", "{25B3B77E-0CAE-464F-AA72-D52C9F9F9358}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaxSync.XPrototype.ConsoleApp", "FaxSync.XPrototype.ConsoleApp\FaxSync.XPrototype.ConsoleApp.csproj", "{8A6AB392-76A6-43D8-9984-14EC7D5021F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaxSync.UnitTest", "FaxSync.UnitTest\FaxSync.UnitTest.csproj", "{1A76376B-C22B-49BE-970F-D2FBC19FE830}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaxSync.Models", "FaxSnyc.Models\FaxSync.Models.csproj", "{ABCCE29A-09D4-4F96-82DD-CEA14891B925}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{566471A6-223E-423E-B70B-820BF600423D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{566471A6-223E-423E-B70B-820BF600423D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{566471A6-223E-423E-B70B-820BF600423D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{566471A6-223E-423E-B70B-820BF600423D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25B3B77E-0CAE-464F-AA72-D52C9F9F9358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25B3B77E-0CAE-464F-AA72-D52C9F9F9358}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25B3B77E-0CAE-464F-AA72-D52C9F9F9358}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25B3B77E-0CAE-464F-AA72-D52C9F9F9358}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A6AB392-76A6-43D8-9984-14EC7D5021F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A6AB392-76A6-43D8-9984-14EC7D5021F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A6AB392-76A6-43D8-9984-14EC7D5021F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A6AB392-76A6-43D8-9984-14EC7D5021F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A76376B-C22B-49BE-970F-D2FBC19FE830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A76376B-C22B-49BE-970F-D2FBC19FE830}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A76376B-C22B-49BE-970F-D2FBC19FE830}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A76376B-C22B-49BE-970F-D2FBC19FE830}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABCCE29A-09D4-4F96-82DD-CEA14891B925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABCCE29A-09D4-4F96-82DD-CEA14891B925}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABCCE29A-09D4-4F96-82DD-CEA14891B925}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABCCE29A-09D4-4F96-82DD-CEA14891B925}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
