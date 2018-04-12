@@ -1,5 +1,4 @@
-﻿using FaySync.Models;
-using FaxSync.Models;
+﻿using FaxSync.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

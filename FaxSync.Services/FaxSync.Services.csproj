@@ -81,7 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FaxSnyc.Models\FaxSync.Models.csproj">
-      <Project>{ABCCE29A-09D4-4F96-82DD-CEA14891B925}</Project>
+      <Project>{abcce29a-09d4-4f96-82dd-cea14891b925}</Project>
       <Name>FaxSync.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\FaxSync.Domain\FaxSync.Domain.csproj">
