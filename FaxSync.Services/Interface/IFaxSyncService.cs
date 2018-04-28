@@ -8,6 +8,6 @@ namespace FaxSync.Services.Interface
 {
     public interface IFaxSyncService
     {
-        void Sync();
+        void Sync(int? logSessionId);
     }
 }

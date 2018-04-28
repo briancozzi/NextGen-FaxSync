@@ -16,7 +16,7 @@ namespace FaxSync.Prototype.ConsoleApp
         }
         static void AutoSyncTest()
         {
-            var syncService = new SyncService();
+            var syncService = new SyncAssistantService();
             syncService.Sync();
             Console.Read();
         }

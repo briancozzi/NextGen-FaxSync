@@ -96,14 +96,14 @@ namespace FaxSync.Domain
             {
                 if (CurrentFaxNumber.NotNull() && CurrentFaxNumber.Number.IsNotEmpty())
                 {
-                    AddActionSnycItem(ActionSyncType.RemoveUser, ActionSyncReason.FaxNumberChange, CurrentAssistant.UserId, CurrentFaxNumber.Number);
+                    AddActionSnycItem(ActionSyncType.DeAssignUser, ActionSyncReason.FaxNumberChange, CurrentAssistant.UserId, CurrentFaxNumber.Number);
                 }
 
                 if (newFaxNumberIsValid)
                 {
                     if (_assistantChanged.Not())
                     {
-                        AddActionSnycItem(ActionSyncType.AddUser, ActionSyncReason.FaxNumberChange, CurrentAssistant.UserId, NewFaxNumber.Number);
+                        AddActionSnycItem(ActionSyncType.AssignUser, ActionSyncReason.FaxNumberChange, CurrentAssistant.UserId, NewFaxNumber.Number);
                     }
 
                 }
@@ -113,7 +113,7 @@ namespace FaxSync.Domain
             {
                 if (newFaxNumberIsValid)
                 {
-                    AddActionSnycItem(ActionSyncType.AddUser, ActionSyncReason.FaxAndAssistantChange, NewAssistant.UserId, NewFaxNumber.Number);
+                    AddActionSnycItem(ActionSyncType.AssignUser, ActionSyncReason.FaxAndAssistantChange, NewAssistant.UserId, NewFaxNumber.Number);
                 }
             }
         }
@@ -125,12 +125,12 @@ namespace FaxSync.Domain
             {
                 if (CurrentAssistant.NotNull() && CurrentAssistant.UserId.IsNotEmpty())
                 {
-                    AddActionSnycItem(ActionSyncType.RemoveUser, ActionSyncReason.AssistantChange, CurrentAssistant.UserId, CurrentFaxNumber.Number);
+                    AddActionSnycItem(ActionSyncType.DeAssignUser, ActionSyncReason.AssistantChange, CurrentAssistant.UserId, CurrentFaxNumber.Number);
                 }
 
                 if (NewAssistant.NotNull() && NewAssistant.UserId.IsNotEmpty())
                 {
-                    AddActionSnycItem(ActionSyncType.AddUser, ActionSyncReason.AssistantChange, NewAssistant.UserId, CurrentFaxNumber.Number);
+                    AddActionSnycItem(ActionSyncType.AssignUser, ActionSyncReason.AssistantChange, NewAssistant.UserId, CurrentFaxNumber.Number);
                 }
             }
 
@@ -229,7 +229,7 @@ namespace FaxSync.Domain
                     _logResult.Type = LogType.ApiCall;
                     _logResult.Result = action.Result.Result;
                     _logResult.FieldName = "FaxSoultion";
-                    _logResult.NewValue = $"AttId:{action.FaxAttorneyUserId} UsrId:{action.FaxUserId} FaxId:{action.FaxNumberId}";
+                    _logResult.NewValue = $"AttId:{action.AssistantSnycObj.FaxAttorneyUserId} UsrId:{action.AssistantSnycObj.FaxUserId} FaxId:{action.AssistantSnycObj.FaxNumberId}";
                     _logResult.Message = $"Action:{action.ActionType.ToString()} Message:{action.Result.HttpCallLog} {action.Result.Message}";
                     _lstLogResult.Add(_logResult);
                 }

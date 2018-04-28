@@ -1,4 +1,5 @@
-﻿using FaxSync.Models;
+﻿using FaxSnyc.Models.Sync;
+using FaxSync.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,29 +10,24 @@ namespace FaxSync.Domain
 {
     public class ActionSync
     {
-        public string AttorneyId { get; set; }
-        public string UserId { get; set; }
-        public string FaxNumber { get; set; }
-        public int FaxAttorneyUserId { get; set; }
-        public int FaxUserId { get; set; }
-        public int FaxNumberId { get; set; }
-        public bool FaxNumberIsShared { get; set; }
+        public AssistantActionSync AssistantSnycObj { get; set; }
         public ActionSyncType ActionType { get; set; }
         public ActionSyncReason ActionReason { get; set; }
         public ApiResult Result  { get; set; }
         public ActionSync(ActionSyncType type, ActionSyncReason reason, string attorneyId, string userId, string faxNumber)
         {
+            AssistantSnycObj = new AssistantActionSync();
             ActionType = type;
             ActionReason = reason;
-            AttorneyId = attorneyId;
-            UserId = userId;
-            FaxNumber = faxNumber;
+            AssistantSnycObj.AttorneyId = attorneyId;
+            AssistantSnycObj.UserId = userId;
+            AssistantSnycObj.FaxNumber = faxNumber;
         }
         public void SetFaxSolutionsIds(int faxAttorneyUserId, int faxUserId, int faxNumberId)
         {
-            FaxAttorneyUserId = faxAttorneyUserId;
-            FaxNumberId = faxNumberId;
-            FaxUserId = faxUserId;
+            AssistantSnycObj.FaxAttorneyUserId = faxAttorneyUserId;
+            AssistantSnycObj.FaxNumberId = faxNumberId;
+            AssistantSnycObj.FaxUserId = faxUserId;
         }
     }
 }

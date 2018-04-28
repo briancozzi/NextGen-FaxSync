@@ -9,7 +9,10 @@ namespace FaxSync.Models
     public enum ActionSyncType
     {
         AddUser,
-        RemoveUser
+        UpdateUser,
+        RemoveUser,
+        AssignUser,
+        DeAssignUser
     }
     public enum ActionSyncReason
     {

@@ -38,12 +38,12 @@ namespace FaxSync.Services
             return GenerateResult(response,client);
         }
 
-        public FaxApiRootObject<List<FaxUser>> GetAllUsers()
+        public FaxApiRootObject<List<FaxApiUser>> GetAllUsers()
         {
             var client = BuildRestClient();
             var request = new RestRequest("users.json", Method.GET);
 
-            IRestResponse <FaxApiRootObject<List<FaxUser>>> response = client.Execute<FaxApiRootObject<List<FaxUser>>>(request);
+            IRestResponse <FaxApiRootObject<List<FaxApiUser>>> response = client.Execute<FaxApiRootObject<List<FaxApiUser>>>(request);
             return response.Data;
         }
         public FaxApiRootObject<List<FaxApiNumber>> GetAllFaxNumbers()

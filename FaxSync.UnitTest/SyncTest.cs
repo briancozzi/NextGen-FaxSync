@@ -31,10 +31,10 @@ namespace FaxSync.UnitTest
             attorney.Process();
 
             Assert.IsTrue(attorney.ActionList.Count == 1);
-            Assert.IsTrue(attorney.ActionList[0].ActionType == ActionSyncType.AddUser);
+            Assert.IsTrue(attorney.ActionList[0].ActionType == ActionSyncType.AssignUser);
             Assert.IsTrue(attorney.ActionList[0].ActionReason == ActionSyncReason.FaxAndAssistantChange);
-            Assert.IsTrue(attorney.ActionList[0].UserId == userNewAssistant.UserId);
-            Assert.IsTrue(attorney.ActionList[0].FaxNumber == attorney.NewFaxNumber.Number);
+            Assert.IsTrue(attorney.ActionList[0].AssistantSnycObj.UserId == userNewAssistant.UserId);
+            Assert.IsTrue(attorney.ActionList[0].AssistantSnycObj.FaxNumber == attorney.NewFaxNumber.Number);
         }
         [TestMethod]
         public void NewAttorneyBlackListedNumber()
@@ -65,15 +65,15 @@ namespace FaxSync.UnitTest
             attorney.Process();
 
             Assert.IsTrue(attorney.ActionList.Count == 2);
-            Assert.IsTrue(attorney.ActionList[0].ActionType == ActionSyncType.RemoveUser);
+            Assert.IsTrue(attorney.ActionList[0].ActionType == ActionSyncType.DeAssignUser);
             Assert.IsTrue(attorney.ActionList[0].ActionReason == ActionSyncReason.AssistantChange);
-            Assert.IsTrue(attorney.ActionList[0].UserId == userCurrentAssistant.UserId);
-            Assert.IsTrue(attorney.ActionList[0].FaxNumber == attorney.CurrentFaxNumber.Number);
+            Assert.IsTrue(attorney.ActionList[0].AssistantSnycObj.UserId == userCurrentAssistant.UserId);
+            Assert.IsTrue(attorney.ActionList[0].AssistantSnycObj.FaxNumber == attorney.CurrentFaxNumber.Number);
 
-            Assert.IsTrue(attorney.ActionList[1].ActionType == ActionSyncType.AddUser);
+            Assert.IsTrue(attorney.ActionList[1].ActionType == ActionSyncType.AssignUser);
             Assert.IsTrue(attorney.ActionList[1].ActionReason == ActionSyncReason.AssistantChange);
-            Assert.IsTrue(attorney.ActionList[1].UserId == userNewAssistant.UserId);
-            Assert.IsTrue(attorney.ActionList[1].FaxNumber == attorney.CurrentFaxNumber.Number);
+            Assert.IsTrue(attorney.ActionList[1].AssistantSnycObj.UserId == userNewAssistant.UserId);
+            Assert.IsTrue(attorney.ActionList[1].AssistantSnycObj.FaxNumber == attorney.CurrentFaxNumber.Number);
         }
         [TestMethod]
         public void AttorneyRemoveAssistant()
@@ -91,10 +91,10 @@ namespace FaxSync.UnitTest
             attorney.Process();
 
             Assert.IsTrue(attorney.ActionList.Count == 1);
-            Assert.IsTrue(attorney.ActionList[0].ActionType == ActionSyncType.RemoveUser);
+            Assert.IsTrue(attorney.ActionList[0].ActionType == ActionSyncType.DeAssignUser);
             Assert.IsTrue(attorney.ActionList[0].ActionReason == ActionSyncReason.AssistantChange);
-            Assert.IsTrue(attorney.ActionList[0].UserId == userCurrentAssistant.UserId);
-            Assert.IsTrue(attorney.ActionList[0].FaxNumber == attorney.CurrentFaxNumber.Number);
+            Assert.IsTrue(attorney.ActionList[0].AssistantSnycObj.UserId == userCurrentAssistant.UserId);
+            Assert.IsTrue(attorney.ActionList[0].AssistantSnycObj.FaxNumber == attorney.CurrentFaxNumber.Number);
         }
         [TestMethod]
         public void AttorneyChangeFaxNumber()
@@ -112,15 +112,15 @@ namespace FaxSync.UnitTest
             attorney.Process();
 
             Assert.IsTrue(attorney.ActionList.Count == 2);
-            Assert.IsTrue(attorney.ActionList[0].ActionType == ActionSyncType.RemoveUser);
+            Assert.IsTrue(attorney.ActionList[0].ActionType == ActionSyncType.DeAssignUser);
             Assert.IsTrue(attorney.ActionList[0].ActionReason == ActionSyncReason.FaxNumberChange);
-            Assert.IsTrue(attorney.ActionList[0].UserId == userCurrentAssistant.UserId);
-            Assert.IsTrue(attorney.ActionList[0].FaxNumber == attorney.CurrentFaxNumber.Number);
+            Assert.IsTrue(attorney.ActionList[0].AssistantSnycObj.UserId == userCurrentAssistant.UserId);
+            Assert.IsTrue(attorney.ActionList[0].AssistantSnycObj.FaxNumber == attorney.CurrentFaxNumber.Number);
 
-            Assert.IsTrue(attorney.ActionList[1].ActionType == ActionSyncType.AddUser);
+            Assert.IsTrue(attorney.ActionList[1].ActionType == ActionSyncType.AssignUser);
             Assert.IsTrue(attorney.ActionList[1].ActionReason == ActionSyncReason.FaxNumberChange);
-            Assert.IsTrue(attorney.ActionList[1].UserId == userCurrentAssistant.UserId);
-            Assert.IsTrue(attorney.ActionList[1].FaxNumber == attorney.NewFaxNumber.Number);
+            Assert.IsTrue(attorney.ActionList[1].AssistantSnycObj.UserId == userCurrentAssistant.UserId);
+            Assert.IsTrue(attorney.ActionList[1].AssistantSnycObj.FaxNumber == attorney.NewFaxNumber.Number);
         }
         [TestMethod]
         public void AttorneyChangeFaxNumberAndAssistant()
@@ -139,15 +139,15 @@ namespace FaxSync.UnitTest
             attorney.Process();
 
             Assert.IsTrue(attorney.ActionList.Count == 2);
-            Assert.IsTrue(attorney.ActionList[0].ActionType == ActionSyncType.RemoveUser);
+            Assert.IsTrue(attorney.ActionList[0].ActionType == ActionSyncType.DeAssignUser);
             Assert.IsTrue(attorney.ActionList[0].ActionReason == ActionSyncReason.FaxNumberChange);
-            Assert.IsTrue(attorney.ActionList[0].UserId == userCurrentAssistant.UserId);
-            Assert.IsTrue(attorney.ActionList[0].FaxNumber == attorney.CurrentFaxNumber.Number);
+            Assert.IsTrue(attorney.ActionList[0].AssistantSnycObj.UserId == userCurrentAssistant.UserId);
+            Assert.IsTrue(attorney.ActionList[0].AssistantSnycObj.FaxNumber == attorney.CurrentFaxNumber.Number);
 
-            Assert.IsTrue(attorney.ActionList[1].ActionType == ActionSyncType.AddUser);
+            Assert.IsTrue(attorney.ActionList[1].ActionType == ActionSyncType.AssignUser);
             Assert.IsTrue(attorney.ActionList[1].ActionReason == ActionSyncReason.FaxAndAssistantChange);
-            Assert.IsTrue(attorney.ActionList[1].UserId == userNewAssistant.UserId);
-            Assert.IsTrue(attorney.ActionList[1].FaxNumber == attorney.NewFaxNumber.Number);
+            Assert.IsTrue(attorney.ActionList[1].AssistantSnycObj.UserId == userNewAssistant.UserId);
+            Assert.IsTrue(attorney.ActionList[1].AssistantSnycObj.FaxNumber == attorney.NewFaxNumber.Number);
         }
         [TestMethod]
         public void AttorneyChangeFaxNumberAndAssistantWithBlackListedFax()
@@ -166,10 +166,10 @@ namespace FaxSync.UnitTest
             attorney.Process();
 
             Assert.IsTrue(attorney.ActionList.Count == 1);
-            Assert.IsTrue(attorney.ActionList[0].ActionType == ActionSyncType.RemoveUser);
+            Assert.IsTrue(attorney.ActionList[0].ActionType == ActionSyncType.DeAssignUser);
             Assert.IsTrue(attorney.ActionList[0].ActionReason == ActionSyncReason.FaxNumberChange);
-            Assert.IsTrue(attorney.ActionList[0].UserId == userCurrentAssistant.UserId);
-            Assert.IsTrue(attorney.ActionList[0].FaxNumber == attorney.CurrentFaxNumber.Number);
+            Assert.IsTrue(attorney.ActionList[0].AssistantSnycObj.UserId == userCurrentAssistant.UserId);
+            Assert.IsTrue(attorney.ActionList[0].AssistantSnycObj.FaxNumber == attorney.CurrentFaxNumber.Number);
         }
         [TestMethod]
         public void AttorneyChangeFaxNumberFromBlackListedToBlackListed()

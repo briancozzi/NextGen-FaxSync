@@ -21,11 +21,11 @@ namespace FaxSync.Services
             return FakeApiResult(faxNumberId, faxUserId);
         }
 
-        public FaxApiRootObject<List<FaxUser>> GetAllUsers()
+        public FaxApiRootObject<List<FaxApiUser>> GetAllUsers()
         {
-            return new FaxApiRootObject<List<FaxUser>>()
+            return new FaxApiRootObject<List<FaxApiUser>>()
             {
-                data = new List<FaxUser>() { new FaxUser { username = "pkuchnicki", id = 123123 } },
+                data = new List<FaxApiUser>() { new FaxApiUser { username = "pkuchnicki", id = 123123 } },
                 result = true,
                 errors = null
             };

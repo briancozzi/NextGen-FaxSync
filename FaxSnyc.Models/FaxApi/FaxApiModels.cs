@@ -1,7 +1,7 @@
 ﻿
 namespace FaxSync.Models.FaxApi
 {
-    public class FaxUser
+    public class FaxApiUser
     {
         public int id { get; set; }
         public int enterprise_id { get; set; }
@@ -33,6 +33,12 @@ namespace FaxSync.Models.FaxApi
         public int FaxNumberId { get; set; }
         public string FaxNumber { get; set; }
         public bool Shared { get; set; }
+    }
+
+    public class FaxApiGroup
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
     public class FaxApiRootObject<T>
     {
