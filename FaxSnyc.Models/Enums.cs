@@ -16,6 +16,11 @@ namespace FaxSync.Models
     }
     public enum ActionSyncReason
     {
+        NewUser,
+        UserIsDisabled,
+        UserIsRemovedFromAd,
+        UserIsUpdated,
+        UpdateUserFaxGroup,
         FaxNumberChange,
         AssistantChange,
         FaxAndAssistantChange,

@@ -42,7 +42,22 @@ namespace FaxSync.Services
                 DisplayName = x.DisplayName,
                 Excluded = x.ExcludeFromFaxSyncScript.IsNotEmpty() && (x.ExcludeFromFaxSyncScript.CompareAreEqual("1") || x.ExcludeFromFaxSyncScript.CompareAreEqual("true")),
                 FaxNumber = x.FaxNo,
-                UserId = x.samAccountName
+                UserId = x.samAccountName,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                MobileNumber = x.MobileNo,
+                PhoneNumber = x.Phone,
+                State = x.State,
+                Address = x.StreetAddress,
+                City = x.City,
+                Email = x.EmailAddress,
+                JobTitle = x.JobTitle,
+                Language = "en"            
+                // Company["company"]
+                // Language["preferredLanguage"]
+                // Country["c"] 
+                // ExternalId["objectGUID"]
+                //[group_id: "l"]
             }).ToList();
             
             //LoadedUsers = new List<AdUser>();

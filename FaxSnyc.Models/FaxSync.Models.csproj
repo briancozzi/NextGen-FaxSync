@@ -45,6 +45,7 @@
     <Compile Include="DbUser.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="FaxApi\FaxApiModels.cs" />
+    <Compile Include="Sync\FaxApiUserActionSync.cs" />
     <Compile Include="Interface\IAdUser.cs" />
     <Compile Include="Interface\IDbUser.cs" />
     <Compile Include="Interface\ILogResults.cs" />

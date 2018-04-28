@@ -30,6 +30,7 @@ namespace FaxSync.Models
         public string ZipCode { get; set; }
         public string PhoneNumber { get; set; }
         public string MobileNumber { get; set; }
+        public string Language { get; set; }
 
     }
 }

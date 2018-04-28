@@ -1,24 +1,27 @@
 ﻿using FaxSnyc.Models.Sync;
 using FaxSync.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using FaxSync.Models.FaxApi;
 namespace FaxSync.Domain
 {
     public class ActionSync
     {
+        public FaxApiUserActionSync FaxUserSyncObj { get; set; }
         public AssistantActionSync AssistantSnycObj { get; set; }
         public ActionSyncType ActionType { get; set; }
         public ActionSyncReason ActionReason { get; set; }
         public ApiResult Result  { get; set; }
-        public ActionSync(ActionSyncType type, ActionSyncReason reason, string attorneyId, string userId, string faxNumber)
+        private ActionSync(ActionSyncType type, ActionSyncReason reason)
         {
-            AssistantSnycObj = new AssistantActionSync();
             ActionType = type;
             ActionReason = reason;
+        }
+        public ActionSync(ActionSyncType type, ActionSyncReason reason, FaxApiUserActionSync faxUserObj) : this(type, reason)
+        {
+            FaxUserSyncObj = faxUserObj;
+        }
+        public ActionSync(ActionSyncType type, ActionSyncReason reason, string attorneyId, string userId, string faxNumber):this(type,reason)
+        {
+            AssistantSnycObj = new AssistantActionSync();          
             AssistantSnycObj.AttorneyId = attorneyId;
             AssistantSnycObj.UserId = userId;
             AssistantSnycObj.FaxNumber = faxNumber;

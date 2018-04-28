@@ -15,5 +15,20 @@ namespace FaxSync.Models.Interface
         string AssistantDisplayName { get; set; }
         bool Disabled { get; set; }
         bool Excluded { get; set; }
+        string Office { get; set; }
+        string Email { get; set; }
+        string FirstName { get; set; }
+        string LastName { get; set; }
+        string Role { get; set; }
+        string JobTitle { get; set; }
+        string CompanyName { get; set; }
+        string Address { get; set; }
+        string City { get; set; }
+        string State { get; set; }
+        string Country { get; set; }
+        string ZipCode { get; set; }
+        string PhoneNumber { get; set; }
+        string MobileNumber { get; set; }
+        string Language { get; set; }
     }
 }
