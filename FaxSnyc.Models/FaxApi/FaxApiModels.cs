@@ -34,11 +34,11 @@ namespace FaxSync.Models.FaxApi
         public string FaxNumber { get; set; }
         public bool Shared { get; set; }
     }
-
     public class FaxApiGroup
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public bool Default { get; set; }
     }
     public class FaxApiRootObject<T>
     {

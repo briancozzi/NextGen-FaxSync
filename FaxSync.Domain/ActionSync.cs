@@ -1,6 +1,8 @@
 ﻿using FaxSnyc.Models.Sync;
 using FaxSync.Models;
 using FaxSync.Models.FaxApi;
+using System.Text;
+
 namespace FaxSync.Domain
 {
     public class ActionSync
@@ -31,6 +33,20 @@ namespace FaxSync.Domain
             AssistantSnycObj.FaxAttorneyUserId = faxAttorneyUserId;
             AssistantSnycObj.FaxNumberId = faxNumberId;
             AssistantSnycObj.FaxUserId = faxUserId;
+        }
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.Append($"Action:{ActionType.ToString()} Reason:{ActionReason.ToString()}");
+            if(ActionType == ActionSyncType.AddUser || ActionType == ActionSyncType.RemoveUser || ActionType == ActionSyncType.UpdateUser)
+            {
+                sb.Append($" User={FaxUserSyncObj.first_name} {FaxUserSyncObj.last_name} ({FaxUserSyncObj.username})");
+            }
+            else
+            {
+                sb.Append($" AttorneyId={AssistantSnycObj.AttorneyId}  AssistantUserId={AssistantSnycObj.FaxUserId} FaxNumber={AssistantSnycObj.FaxNumber}");
+            }
+            return sb.ToString();
         }
     }
 }

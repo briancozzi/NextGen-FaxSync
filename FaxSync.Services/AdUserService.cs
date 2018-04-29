@@ -42,6 +42,7 @@ namespace FaxSync.Services
                 DisplayName = x.DisplayName,
                 Excluded = x.ExcludeFromFaxSyncScript.IsNotEmpty() && (x.ExcludeFromFaxSyncScript.CompareAreEqual("1") || x.ExcludeFromFaxSyncScript.CompareAreEqual("true")),
                 FaxNumber = x.FaxNo,
+                Office = x.Office,
                 UserId = x.samAccountName,
                 FirstName = x.FirstName,
                 LastName = x.LastName,

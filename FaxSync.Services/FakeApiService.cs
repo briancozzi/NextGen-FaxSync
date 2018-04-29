@@ -11,12 +11,12 @@ namespace FaxSync.Services
 {
     public class FakeApiService : IFaxApiService
     {
-        public ApiResult AddUser(int faxNumberId, int faxUserId)
+        public ApiResult AssignUser(int faxNumberId, int faxUserId)
         {
             return FakeApiResult(faxNumberId, faxUserId);
         }
 
-        public ApiResult RemoveUser(int faxNumberId, int faxUserId)
+        public ApiResult UnAssignUser(int faxNumberId, int faxUserId)
         {
             return FakeApiResult(faxNumberId, faxUserId);
         }

@@ -130,9 +130,9 @@ namespace FaxSync.Services
                     MapFaxSolutionIdsWithActionItems(action, faxUsers, faxNumbers);
 
                     if (action.ActionType == ActionSyncType.AssignUser && action.AssistantSnycObj.FaxNumberIsShared.Not())
-                        action.Result = FaxApiService.AddUser(action.AssistantSnycObj.FaxNumberId, action.AssistantSnycObj.FaxUserId);
+                        action.Result = FaxApiService.AssignUser(action.AssistantSnycObj.FaxNumberId, action.AssistantSnycObj.FaxUserId);
                     else if (action.ActionType == ActionSyncType.DeAssignUser)
-                        action.Result = FaxApiService.RemoveUser(action.AssistantSnycObj.FaxNumberId, action.AssistantSnycObj.FaxUserId);
+                        action.Result = FaxApiService.UnAssignUser(action.AssistantSnycObj.FaxNumberId, action.AssistantSnycObj.FaxUserId);
                 }
             }
 

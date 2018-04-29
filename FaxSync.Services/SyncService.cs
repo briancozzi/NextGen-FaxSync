@@ -16,7 +16,6 @@ namespace FaxSync.Services
         protected AdUserService AdUserService { get; set; }
         protected DbUserService DbUserService { get; set; }
         protected HelperService HelperService { get; set; }
-        protected FaxApiService FaxApiServiceReal { get; set; }
         protected FaxApiService FaxApiService { get; set; }
         protected LogService LogService { get; set; }
         public SyncService()

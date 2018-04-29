@@ -16,7 +16,7 @@ namespace FaxSync.Services
     {
         const string _apiURL = "https://portal.xmedius.com/enterprises/clarkhill/";
         const string _token = "535ffa49e0c63561bfd18a835d3b2245";
-        public ApiResult AddUser(int faxNumberId, int faxUserId)
+        public ApiResult AssignUser(int faxNumberId, int faxUserId)
         {
             var client = BuildRestClient();
             var request = new RestRequest("fax_numbers/{faxId}/associate.json", Method.POST);
@@ -27,7 +27,7 @@ namespace FaxSync.Services
             return GenerateResult(response,client);
         }
 
-        public ApiResult RemoveUser(int faxNumberId, int faxUserId)
+        public ApiResult UnAssignUser(int faxNumberId, int faxUserId)
         {
             var client = BuildRestClient();
             var request = new RestRequest("fax_numbers/{faxId}/disassociate.json", Method.POST);
@@ -63,6 +63,43 @@ namespace FaxSync.Services
             }
 
             return resultObject;
+        }
+
+        public FaxApiRootObject<List<FaxApiGroup>> GetAllFaxGroups()
+        {
+            var client = BuildRestClient();
+            var request = new RestRequest("groups.json", Method.GET);
+            IRestResponse<FaxApiRootObject<string>> response = client.Execute<FaxApiRootObject<string>>(request);
+
+            var resultObject = new FaxApiRootObject<List<FaxApiGroup>>();
+            resultObject.errors = response.Data.errors;
+            resultObject.result = response.Data.result;
+            resultObject.data = new List<FaxApiGroup>();
+
+            if (response.Data.result)
+            {
+                resultObject.data = ExtractFaxGroupsFromResult(response.Data.data);
+            }
+
+            return resultObject;
+        }
+
+        private List<FaxApiGroup> ExtractFaxGroupsFromResult(string result)
+        {
+            var root = JObject.Parse(result);
+            var defaultFaxId = root["default"].ToString().toInt();
+            var faxGroups = JObject.Parse(root["groups"].ToString());
+            var prop = faxGroups.Properties().Select(p => p.Name);
+            var lstFaxGroups = new List<FaxApiGroup>();
+            foreach (var item in prop)
+            {
+                var faxGroupObj = new FaxApiGroup();
+                faxGroupObj.Id = item.toInt();
+                faxGroupObj.Name = faxGroups[item].ToString();
+                faxGroupObj.Default = item.toInt() == defaultFaxId;
+                lstFaxGroups.Add(faxGroupObj);
+            }
+            return lstFaxGroups;
         }
 
         private List<FaxApiNumber> ExtractFaxNumbersFromResult(string result)

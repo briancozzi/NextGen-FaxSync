@@ -20,6 +20,7 @@ namespace FaxSync.Models
         UserIsDisabled,
         UserIsRemovedFromAd,
         UserIsUpdated,
+        UserWihtoutFaxAndOffice,
         UpdateUserFaxGroup,
         FaxNumberChange,
         AssistantChange,

@@ -8,6 +8,6 @@ namespace FaxSync.Services.Interface
 {
     public interface IEventLogerService
     {
-        void LogEvent(string eventMessage);
+        void LogEvent(string eventMessage, bool addTimeStamp);
     }
 }
