@@ -5,6 +5,7 @@ using FaxSync.Models.Interface;
 using FaxSync.Services.Interface;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,12 +17,16 @@ namespace FaxSync.Services
         public void Sync(int? logSessionId = null)
         {
             var sessionId = LogService.LogStartSession();
+            LogService.LogStartEvent("START - xMedius Script - Sync Assistants Script");
             SyncMissingDbUsers();
             var listAttorney = LoadAttorneys();
             var listOfExecutionResults = SyncUsersWithFaxSolution(listAttorney);
             UpdateDbUsersFromExecutionResults(listOfExecutionResults);
             LogChanges(sessionId, listOfExecutionResults);
             LogService.LogEndSession(sessionId, result: true, message: "Result message");
+            DirectoryInfo directory = new DirectoryInfo("Logs");
+            directory.Create();
+            File.WriteAllLines("Logs\\XMedius_SyncAssistants_Log_" + DateTime.Now.ToString("yyyyMMddHHmmssffff"), LogService.LogEventsList);
 
         }
 
@@ -52,7 +57,7 @@ namespace FaxSync.Services
             var adUsers = AdUserService.GetCachedUsers();
             var dbUsers = DbUserService.GetAllUsers();
             var dbUsersIds = dbUsers.Select(x => x.AttorneyUserID.ToLower()).ToList();
-            var missingUsers = adUsers.Where(x => !dbUsersIds.Contains(x.UserId.ToLower()));
+            var missingUsers = adUsers.Where(x => !dbUsersIds.Contains(x.UserId.ToLower())).ToList();
             DbUserService.AddMissingUsers(missingUsers);
             this.LogService.LogEvent("FINISH: Sync missing users in was/is table");
         }

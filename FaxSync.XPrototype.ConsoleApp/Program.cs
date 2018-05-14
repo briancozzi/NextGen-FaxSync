@@ -12,13 +12,12 @@ namespace FaxSync.Prototype.ConsoleApp
     {
         static void Main(string[] args)
         {
-            AutoSyncUsersTest();
+            AutoSyncAssitantsTest();
         }
         static void AutoSyncAssitantsTest()
         {
             var syncService = new SyncAssistantService();
             syncService.Sync();
-            Console.Read();
         }
         static void AutoSyncUsersTest()
         {

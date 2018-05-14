@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaxSync.Domain", "FaxSync.Domain\FaxSync.Domain.csproj", "{566471A6-223E-423E-B70B-820BF600423D}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaxSync.UnitTest", "FaxSync.UnitTest\FaxSync.UnitTest.csproj", "{1A76376B-C22B-49BE-970F-D2FBC19FE830}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaxSync.Models", "FaxSnyc.Models\FaxSync.Models.csproj", "{ABCCE29A-09D4-4F96-82DD-CEA14891B925}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaxSync.DataAccess", "FaxSync.DataAccess\FaxSync.DataAccess.csproj", "{82857E77-A2F8-4130-B583-76FD6264FB5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,8 +41,15 @@ Global
 		{ABCCE29A-09D4-4F96-82DD-CEA14891B925}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABCCE29A-09D4-4F96-82DD-CEA14891B925}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABCCE29A-09D4-4F96-82DD-CEA14891B925}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82857E77-A2F8-4130-B583-76FD6264FB5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82857E77-A2F8-4130-B583-76FD6264FB5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82857E77-A2F8-4130-B583-76FD6264FB5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82857E77-A2F8-4130-B583-76FD6264FB5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6BF26917-A837-4453-AD7D-4B22073F514F}
 	EndGlobalSection
 EndGlobal
