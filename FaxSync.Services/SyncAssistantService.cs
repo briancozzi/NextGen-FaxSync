@@ -24,9 +24,9 @@ namespace FaxSync.Services
             UpdateDbUsersFromExecutionResults(listOfExecutionResults);
             LogChanges(sessionId, listOfExecutionResults);
             LogService.LogEndSession(sessionId, result: true, message: "Result message");
-            DirectoryInfo directory = new DirectoryInfo("Logs");
+            DirectoryInfo directory = new DirectoryInfo(@"C:\xMediusSyncApp\Logs");
             directory.Create();
-            File.WriteAllLines("Logs\\XMedius_SyncAssistants_Log_" + DateTime.Now.ToString("yyyyMMddHHmmssffff"), LogService.LogEventsList);
+            File.WriteAllLines("C:\\xMediusSyncApp\\Logs\\XMedius_SyncAssistants_Log_" + DateTime.Now.ToString("yyyyMMddHHmmssffff"), LogService.LogEventsList);
 
         }
 
