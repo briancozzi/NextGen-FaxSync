@@ -70,7 +70,10 @@ namespace FaxSync.Services
             var listAttoryes = new List<Attorney>();
             foreach (var user in dbUsers)
             {
-                listAttoryes.Add(BuildAttorney(user, blackListedNumbers));
+                var attorneyObj = BuildAttorney(user, blackListedNumbers);
+                if(attorneyObj.NotNull())
+                    listAttoryes.Add(attorneyObj);
+
             }
             this.LogService.LogEvent("FINISH: Load Attorneys: Loading the data from AD and mapping with DB user.");
             return listAttoryes;
@@ -78,6 +81,9 @@ namespace FaxSync.Services
         private Attorney BuildAttorney(IDbUser dbUser, List<string> blackListedFaxNumbers)
         {
             var attorney = AdUserService.GetUserById(dbUser.AttorneyUserID);
+            if (attorney == null)
+                return null;
+
             var previousAssistant = AdUserService.GetUserById(dbUser.PreviousAssistantUserId);
             var currentAssistant = AdUserService.GetUserById(dbUser.CurrentAssistantUserId);
             var newAssistant = AdUserService.GetUserById(attorney.AssistantId);
