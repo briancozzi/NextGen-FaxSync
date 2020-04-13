@@ -15,7 +15,7 @@ namespace FaxSync.Services
     public class FaxApiService : IFaxApiService
     {
         const string _apiURL = "https://portal.xmedius.com/enterprises/clarkhill/";
-        const string _token = "535ffa49e0c63561bfd18a835d3b2245";
+        const string _token = "";
         public ApiResult AssignUser(int faxNumberId, int faxUserId)
         {
             var client = BuildRestClient();
