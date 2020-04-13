@@ -12,11 +12,16 @@ namespace FaxSync.Prototype.ConsoleApp
     {
         static void Main(string[] args)
         {
-            AutoSyncTest();
+            AutoSyncAssitantsTest();
         }
-        static void AutoSyncTest()
+        static void AutoSyncAssitantsTest()
         {
-            var syncService = new SyncService();
+            var syncService = new SyncAssistantService();
+            syncService.Sync();
+        }
+        static void AutoSyncUsersTest()
+        {
+            var syncService = new SyncUserService();
             syncService.Sync();
             Console.Read();
         }
@@ -29,9 +34,9 @@ namespace FaxSync.Prototype.ConsoleApp
             var paul = users.data.Where(x => x.username.CompareAreEqual(paulUserName))
                                  .FirstOrDefault();
 
-            var resultAssign = faxApi.AddUser(paul.main_fax_number_id, paul.id);
-            var resultUnassigm = faxApi.RemoveUser(paul.main_fax_number_id, paul.id);
-            resultAssign = faxApi.AddUser(paul.main_fax_number_id, paul.id);
+            var resultAssign = faxApi.AssignUser(paul.main_fax_number_id, paul.id);
+            var resultUnassigm = faxApi.UnAssignUser(paul.main_fax_number_id, paul.id);
+            resultAssign = faxApi.AssignUser(paul.main_fax_number_id, paul.id);
         }
     }
 }

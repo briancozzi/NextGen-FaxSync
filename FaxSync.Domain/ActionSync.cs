@@ -1,37 +1,52 @@
-﻿using FaxSync.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using FaxSnyc.Models.Sync;
+using FaxSync.Models;
+using FaxSync.Models.FaxApi;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FaxSync.Domain
 {
     public class ActionSync
     {
-        public string AttorneyId { get; set; }
-        public string UserId { get; set; }
-        public string FaxNumber { get; set; }
-        public int FaxAttorneyUserId { get; set; }
-        public int FaxUserId { get; set; }
-        public int FaxNumberId { get; set; }
-        public bool FaxNumberIsShared { get; set; }
+        public FaxApiUserActionSync FaxUserSyncObj { get; set; }
+        public AssistantActionSync AssistantSnycObj { get; set; }
         public ActionSyncType ActionType { get; set; }
         public ActionSyncReason ActionReason { get; set; }
         public ApiResult Result  { get; set; }
-        public ActionSync(ActionSyncType type, ActionSyncReason reason, string attorneyId, string userId, string faxNumber)
+        private ActionSync(ActionSyncType type, ActionSyncReason reason)
         {
             ActionType = type;
             ActionReason = reason;
-            AttorneyId = attorneyId;
-            UserId = userId;
-            FaxNumber = faxNumber;
+        }
+        public ActionSync(ActionSyncType type, ActionSyncReason reason, FaxApiUserActionSync faxUserObj) : this(type, reason)
+        {
+            FaxUserSyncObj = faxUserObj;
+        }
+        public ActionSync(ActionSyncType type, ActionSyncReason reason, string attorneyId, string userId, string faxNumber):this(type,reason)
+        {
+            AssistantSnycObj = new AssistantActionSync();          
+            AssistantSnycObj.AttorneyId = attorneyId;
+            AssistantSnycObj.UserId = userId;
+            AssistantSnycObj.FaxNumber = faxNumber;
         }
         public void SetFaxSolutionsIds(int faxAttorneyUserId, int faxUserId, int faxNumberId)
         {
-            FaxAttorneyUserId = faxAttorneyUserId;
-            FaxNumberId = faxNumberId;
-            FaxUserId = faxUserId;
+            AssistantSnycObj.FaxAttorneyUserId = faxAttorneyUserId;
+            AssistantSnycObj.FaxNumberId = faxNumberId;
+            AssistantSnycObj.FaxUserId = faxUserId;
+        }
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.Append($"Action:{ActionType.ToString()} Reason:{ActionReason.ToString()}");
+            if(ActionType == ActionSyncType.AddUser || ActionType == ActionSyncType.RemoveUser || ActionType == ActionSyncType.UpdateUser)
+            {
+                sb.Append($" User={FaxUserSyncObj.first_name} {FaxUserSyncObj.last_name} ({FaxUserSyncObj.username})");
+            }
+            else
+            {
+                sb.Append($" AttorneyId={AssistantSnycObj.AttorneyId}  AssistantUserId={AssistantSnycObj.FaxUserId} FaxNumber={AssistantSnycObj.FaxNumber}");
+            }
+            return sb.ToString();
         }
     }
 }

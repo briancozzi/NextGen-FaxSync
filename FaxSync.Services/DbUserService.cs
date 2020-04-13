@@ -6,55 +6,81 @@ using System.Threading.Tasks;
 using FaxSync.Services.Interface;
 using FaxSync.Models.Interface;
 using FaxSync.Models;
+using FaxSync.DataAccess;
+using NextGen.Infrastructure.Utilities;
 
 namespace FaxSync.Services
 {
     public class DbUserService : IDbUserService
     {
-        List<DbUser> _listUsers;
+        private XMediusFaxSyncContext xMediusContext { get; set; } 
         public DbUserService()
         {
-            _listUsers = new List<DbUser>();
-            //var user = new DbUser();
-            //user.AttorneyUserID = "pkuchnicki";
-            //user.CurrentAssistantUserId = "";
-            ////user.CurrentFaxNumber = "+14123942555";
-            //_listUsers.Add(user);
         }
         
-        public bool AddMissingUsers(IEnumerable<IAdUser> user)
+        public bool AddMissingUsers(IEnumerable<IAdUser> users)
         {
-            var dbUsers = user.Select(x => new DbUser()
+            xMediusContext = new XMediusFaxSyncContext();
+            var usersIdList = users.Select(x => x.UserId).ToList();
+            var usersThatExsits = xMediusContext.XMediusFaxAssistantSyncs
+                                                .Where(x => usersIdList.Contains(x.AttorneyUserID)).Select(x => x.AttorneyUserID).ToList();
+            var usetNotExsits = users.Where(x => !usersThatExsits.Contains(x.UserId)).ToList();
+
+
+            var dbUsers = usetNotExsits.Select(x => new XMediusFaxAssistantSync()
             {
                 AttorneyUserID = x.UserId,
                 DateCreated = DateTime.Now
             });
-            _listUsers.AddRange(dbUsers);
+            xMediusContext.XMediusFaxAssistantSyncs.AddRange(dbUsers);
+            xMediusContext.SaveChanges();
             return true;
         }
 
         public bool UpdateUser(IDbUser user)
         {
-            var dbUser = _listUsers.FirstOrDefault(x => x.AttorneyUserID == x.AttorneyUserID);
-            dbUser.CurrentAssistantUserId = user.CurrentAssistantUserId;
-            dbUser.CurrentFaxNumber = user.CurrentFaxNumber;
-            dbUser.DateUpdated = DateTime.Now;
-            dbUser.PreviousAssistantUserId = user.PreviousAssistantUserId;
-            dbUser.PreviousFaxNumber = user.PreviousFaxNumber;
+            xMediusContext = new XMediusFaxSyncContext();
+            var dbUser = xMediusContext.XMediusFaxAssistantSyncs.FirstOrDefault(x => x.AttorneyUserID == x.AttorneyUserID);
+           
+            MapUserForUpdateding(user, dbUser);
+            xMediusContext.SaveChanges();
             return true;
         }
         public bool UpdateUsers(IEnumerable<IDbUser> user)
         {
+            xMediusContext = new XMediusFaxSyncContext();
             foreach (var usr in user)
             {
-                UpdateUser(usr);
+                var dbUser = xMediusContext.XMediusFaxAssistantSyncs.FirstOrDefault(x => x.AttorneyUserID == usr.AttorneyUserID);
+                MapUserForUpdateding(usr, dbUser);                   
             }
+            xMediusContext.SaveChanges();
             return true;
         }
 
         public IEnumerable<IDbUser> GetAllUsers()
         {
-            return _listUsers.Select(x => (IDbUser)x).ToList();
+            xMediusContext = new XMediusFaxSyncContext();
+            var listDbUsers = new List<IDbUser>();
+            xMediusContext.XMediusFaxAssistantSyncs.ToList().ForEach(x =>
+            {
+                var dbUserObj = new DbUser();
+                ObjectMapper.PropertyMap(x, dbUserObj);
+                listDbUsers.Add(dbUserObj);
+            });
+            return listDbUsers;
         }
+
+        private void MapUserForUpdateding(IDbUser user, XMediusFaxAssistantSync dbUser)
+        {
+            if (dbUser == null) return;
+            dbUser.CurrentAssistantUserId = user.CurrentAssistantUserId;
+            dbUser.CurrentFaxNumber = user.CurrentFaxNumber;
+            dbUser.DateUpdated = DateTime.Now;
+            dbUser.PreviousAssistantUserId = user.PreviousAssistantUserId;
+            dbUser.PreviousFaxNumber = user.PreviousFaxNumber;
+        }
+
+
     }
 }

@@ -12,6 +12,7 @@ namespace FaxSync.Services
     {
         static LogService _logObject;
         static object lockObject;
+        public List<string> LogEventsList { get; private set; } = new List<string>();
         public static IEventLogerService GetLogService()
         {
             lock(lockObject)
@@ -43,14 +44,22 @@ namespace FaxSync.Services
            
         }
 
-        public void LogEvent(string eventMessage)
+        public void LogEvent(string eventMessage,bool addTimeStamp=true)
         {
             try
             {
-                Console.WriteLine($"{DateTime.Now} {eventMessage}");
+                var message = addTimeStamp ? $"{DateTime.Now} {eventMessage}" : eventMessage;
+                Console.WriteLine(message);
+                LogEventsList.Add(message);
             }
             finally
             { }
+        }
+        public void LogStartEvent(string message)
+        {
+            LogEvent("----------------------------------------------", false);
+            LogEvent("### " + message, false);
+            LogEvent("----------------------------------------------", false);
         }
 
         public int LogStartSession()

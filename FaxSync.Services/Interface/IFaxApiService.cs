@@ -9,7 +9,7 @@ namespace FaxSync.Services.Interface
 {
     public interface IFaxApiService
     {
-        ApiResult RemoveUser(int faxNumberId, int faxUserId);
-        ApiResult AddUser(int faxNumberId, int faxUserId);
+        ApiResult UnAssignUser(int faxNumberId, int faxUserId);
+        ApiResult AssignUser(int faxNumberId, int faxUserId);
     }
 }

@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FaxSync.Services</RootNamespace>
     <AssemblyName>FaxSync.Services</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +35,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ThirdPartyDll\CHI.Context.ActiveDirectory.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -47,11 +51,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -76,13 +77,19 @@
     <Compile Include="Interface\ISQLDbConfig.cs" />
     <Compile Include="Interface\IUserService.cs" />
     <Compile Include="LogService.cs" />
+    <Compile Include="SyncAssistantService.cs" />
     <Compile Include="SyncService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SyncUserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FaxSnyc.Models\FaxSync.Models.csproj">
       <Project>{abcce29a-09d4-4f96-82dd-cea14891b925}</Project>
       <Name>FaxSync.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FaxSync.DataAccess\FaxSync.DataAccess.csproj">
+      <Project>{82857e77-a2f8-4130-b583-76fd6264fb5d}</Project>
+      <Name>FaxSync.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\FaxSync.Domain\FaxSync.Domain.csproj">
       <Project>{566471A6-223E-423E-B70B-820BF600423D}</Project>

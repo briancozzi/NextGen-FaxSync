@@ -32,8 +32,8 @@ namespace FaxSync.Services
         public List<AdUser> LoadedUsers { get; private set; }
         public IEnumerable<IAdUser> GetAllUsers()
         {
-            var users = _adUserService.GetAllUsers();
-
+            var users = _adUserService.GetAllUsers()?.Where(x=> x.DistinguishedName.Contains("OU=Users")).ToList();
+         
             return users.Select(x => new AdUser()
             {
                 AssistantId = x.AssistantNetworkID,
@@ -42,19 +42,20 @@ namespace FaxSync.Services
                 DisplayName = x.DisplayName,
                 Excluded = x.ExcludeFromFaxSyncScript.IsNotEmpty() && (x.ExcludeFromFaxSyncScript.CompareAreEqual("1") || x.ExcludeFromFaxSyncScript.CompareAreEqual("true")),
                 FaxNumber = x.FaxNo,
-                UserId = x.samAccountName
+                Office = x.Office,
+                UserId = x.samAccountName,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                MobileNumber = x.MobileNo,
+                PhoneNumber = x.Phone,
+                State = x.State,
+                Address = x.StreetAddress,
+                City = x.City,
+                Email = x.EmailAddress,
+                JobTitle = x.JobTitle,
+                Language = "en",
             }).ToList();
             
-            //LoadedUsers = new List<AdUser>();
-            //var adUser = new AdUser();
-            //adUser.UserId = "pkuchnicki";
-            //adUser.DisplayName ="Paul Kuchnicki";
-            //adUser.AssistantId = "pkuchnicki";
-            //adUser.Disabled = false;
-            //adUser.FaxNumber = "+14123942555";
-            //adUser.Excluded = false;
-            //LoadedUsers.Add(adUser);
-            //return LoadedUsers;
         }
 
         public IEnumerable<IAdUser> GetCachedUsers(bool refreshCache = false)

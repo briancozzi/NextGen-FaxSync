@@ -1,10 +1,12 @@
 ﻿using FaxSync.Services.Interface;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace FaxSync.Services 
 {
@@ -13,7 +15,8 @@ namespace FaxSync.Services
         string _excludedFaxNumbersSqlConnectionString { get; set; }
         public HelperService()
         {
-            _excludedFaxNumbersSqlConnectionString = "Data Source=chvgsql2012;Initial Catalog=NGPortal_QA;User ID=IntranetPortalQA;Password=P@ssword1;";
+            _excludedFaxNumbersSqlConnectionString = ConfigurationManager.ConnectionStrings["XMediusFaxSync"].ConnectionString;
+            //"Data Source=chvgsql2012;Initial Catalog=NGPortal_QA;User ID=IntranetPortalQA;Password=P@ssword1;";
         }
         public HelperService(ISQLDbConfig sqlConfig)
         {

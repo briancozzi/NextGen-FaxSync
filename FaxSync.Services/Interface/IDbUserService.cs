@@ -10,7 +10,7 @@ namespace FaxSync.Services.Interface
     public interface IDbUserService: IUserService<IDbUser>
     {
         bool UpdateUser(IDbUser user);
-        bool AddMissingUsers(IEnumerable<IAdUser> user);
-        bool UpdateUsers(IEnumerable<IDbUser> user);
+        bool AddMissingUsers(IEnumerable<IAdUser> users);
+        bool UpdateUsers(IEnumerable<IDbUser> users);
     }
 }
